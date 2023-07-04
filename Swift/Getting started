@@ -1,0 +1,10 @@
+To get started, fire up Xcode and choose the option to start a new project. Choose iOS, Application, and then choose App. 
+
+Organization identifier should be the reverse of your org's website, e.g. com.google
+
+Bundle identifier is automatically generated from org identifier and product name. 
+
+Choose the interface between Storyboard and SwiftUI based on the specs/needs/preferences.
+
+
+
