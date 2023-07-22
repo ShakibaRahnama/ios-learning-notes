@@ -1,0 +1,16 @@
+override func viewDidLoad() {
+        super.viewDidLoad()
+                
+        let swiftUIView = DiscoverViewSwiftUI(posts: dummyPost) //create an instance of the SwfitUI view here
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        // Notify the hostingController that it has been added to the view hierarchy
+        hostingController.didMove(toParent: self)
+}
