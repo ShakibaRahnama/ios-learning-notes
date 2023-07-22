@@ -5,6 +5,7 @@
 .cornerRadius(10)
 .padding()
 .shadow(color: .black.opacity(0.2), radius: 12, x: 2, y:2)
+.scaledToFit()
 
 .opacity(isAnimating ? 1:0)
 .animation(.linear(duration:1), value: isAnimating)
@@ -57,4 +58,10 @@
 .previewLayout(.sizeThatFits)
 .padding()
 
+//For transitions that don't need to be complex: 
+.sheet(isPresented: $isShowingContentView){
+  ContentView()
+}
 
+//For elements in a container or GroupBox:
+.layoutPriority(1)
