@@ -1,0 +1,6 @@
+This came up when I had to restart the project, something to watch out for next time:
+
+Error: "'FirebaseCore/FirebaseCore.h' file not found"
+Fix: Open .xcworkspace file instead of .xcodeproject file
+
+
