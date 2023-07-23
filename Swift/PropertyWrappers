@@ -6,7 +6,9 @@
 
 @AppStorage
 
-
+@StateObject >>> creates an observable object, manages the object's life cycle (will deallocate the observable object when the instance of the view is destroyed), 
+persists data across updates. Currently using it for Scintilla's discover view, but the fact that it refreshes everytime the user navigates back and forth to the 
+view gives a clunky experience. A possible solution is persisting the data in a local container unless user refreshes. 
 
 
 
