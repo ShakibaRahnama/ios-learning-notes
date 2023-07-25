@@ -1,0 +1,24 @@
+// Closures provide a quick and straightforward method of infomring the main view that the user has performed a certain action in one of the subviews 
+// They're a more quick and easy solution than writing a whole protocol and assigning delegates just for one interaction
+
+import SwiftUI
+
+struct Subview: View {
+    var actionClosure: () -> Void  // here you define an initializer for the subview, and adjust as necessary when creating an instance in the main view
+
+    var body: some View {
+        Button("Perform Action") {
+            // Call the closure when the action is performed
+            actionClosure()
+        }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        // Pass the closure to the subview
+        Subview(actionClosure: {
+            print("Action performed on subview.")
+        })
+    }
+}
