@@ -1,0 +1,15 @@
+// The process takes place in 5 steps: 
+// 1. Set up a server
+// 2. User registration and device tokens
+// 3. Define specific events
+// 4. Implement event detection 
+// 5. Send push notifications 
+// 6. Handle notifications in the app
+
+// If using FCM (Firebase Cloud Messaging), it boils down to:
+// Integrating Firebase into the app, generating tokens, etc. (explained in detail in ios-learning-notes/Swift/Notifications)
+// Set up Firebase Cloud Functions to trigger notifications based on specific events. 
+// When a relevant event occurs, such as a new message or event trigger, your server can use Firebase Cloud Functions 
+// (as shown in the example above) or the Firebase Admin SDK to send a push notification to the user's device.
+
+// I'll write down the steps to use Firebase Cloud Functions more extensively in a different file
