@@ -1,0 +1,6 @@
+// cURL command allows us to query URLs from the command line
+// Some use cases: make regular requests, post form data, authenticate users, save responses to files, test REST APIs, etc.
+
+// For instance, I'm using this command to install Node Version Manager (nvm)
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
