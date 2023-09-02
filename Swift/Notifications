@@ -1,79 +1,80 @@
-To send notifications to users on iOS, you can use Apple's Push Notification Service (APNs) or local notifications. Here's how to implement both methods:
+// From this video: https://www.youtube.com/watch?v=UJree24HWx0
 
-1. **Push Notifications (APNs):**
+// For push notifications: 
+// You'll need a server which notifies APNS (Apple Push Notification Service), which sends a notification to the user's device
+// We can use Firebase for this purpose
+// Add these two dependencies to your Podfile
 
-   Push notifications are messages sent from servers to iOS devices. To send push notifications, you'll need a server to communicate with APNs and an iOS app to receive and display the notifications. Here's a high-level overview of the steps involved:
+// 1. cd to your app's location and add these two dependencies: 
 
-   a. **Set Up APNs:**
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
 
-      - Create an Apple Developer account if you don't have one.
-      - Create an App ID for your app.
-      - Generate an APNs Key in the Apple Developer Portal.
-      - Configure your app to use the APNs Key in Xcode.
+// 2. Install dependencies
+pod install
 
-   b. **Implement Push Notifications in Your App:**
+// 3. On the main project, singing & capabilities, click +Capability
+// Search up Push Notifications and add
 
-      - Request user permission to receive notifications using the `UNUserNotificationCenter` framework.
-      - Register for remote notifications using `UIApplication.shared.registerForRemoteNotifications()`.
+// 4. Go to AppDelegate, import following libraries 
+import Firebase //if you haven't already 
+import FirebaseMessaging
+import UserNotificationsUI // users consent to receiving push notifications
 
-   c. **Send Notifications from Your Server:**
+// 5. In didFinishLaunchingWithOptions
+FirebaseApp.configure()
 
-      - Your server communicates with APNs using HTTP/2 requests.
-      - You need to include the device's device token in the request.
-      - APNs will handle the delivery of the notification to the user's device.
+//6. Get set up in Firebase. I've already completed this step for auth.
+// (Grab the Firebase configuration file, GoogleService plist and copy
+// onto project.)
 
-   d. **Handle Notifications in Your App:**
+// 7. AppDelegate needs to conform to the following: 
+extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate
 
-      - Implement the `UNUserNotificationCenterDelegate` methods to handle incoming notifications.
-      - Display the received notifications to the user.
+//8. Write the minimum code for push notifications in didFinishLaunchingWithOptions:
 
-   Apple provides detailed documentation on implementing push notifications: [Apple Push Notification Service](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server).
+Messaging.messaging().delegate = self
+// Alternatively: 
+Messaging.messaging(self)
+UNUserNotificationCenter.current().delegate = self
 
-2. **Local Notifications:**
+//9. Request consent from user by writing this
 
-   Local notifications are generated and delivered by your iOS app without the need for a server. They are typically used for scheduling reminders, alarms, or events within your app. Here's how to implement local notifications:
-
-   a. **Request Permission:**
-
-      - Request permission from the user to display notifications using the `UNUserNotificationCenter` framework.
-
-   b. **Schedule Local Notifications:**
-
-      - Create instances of `UNNotificationRequest` to define the content of the notification.
-      - Use `UNUserNotificationCenter` to schedule the notifications.
-
-   c. **Handle User Interaction:**
-
-      - Implement the `UNUserNotificationCenterDelegate` methods to handle user interactions with the notifications (e.g., opening the app when a notification is tapped).
-
-   Here's a basic example of scheduling a local notification:
-
-   ```swift
-   import UserNotifications
-
-   // Request permission
-   let center = UNUserNotificationCenter.current()
-   center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-       // Handle the permission request result here
+UNUserNotificationCenter.current().requestAuthorization(option: [.alert, .sound, .badge]) { success, _ in
+   guard success else {
+      return
    }
 
-   // Create a notification content
-   let content = UNMutableNotificationContent()
-   content.title = "My App"
-   content.body = "This is a local notification!"
+   print("success in APNS registry")
+}
+   application.registerForRemoteNotifications()
 
-   // Create a trigger for the notification (e.g., after 5 seconds)
-   let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+   return true
 
-   // Create a notification request
-   let request = UNNotificationRequest(identifier: "notificationIdentifier", content: content, trigger: trigger)
 
-   // Schedule the notification
-   center.add(request) { (error) in
-       // Handle the result of scheduling the notification
+//10. Modify the stub with:
+
+func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+   messaging.token { token in
+      guard let token = token else {
+         return
+      }
+      print("Token: \(token)")
    }
-   ```
+}
 
-Remember to handle user permissions, delegate methods, and notification handling according to your app's requirements.
+// Tokens uniquely identify your app instance and your device. 
+// That way, you can't randomly send notifications mistakenly.
 
-Choose the method that best suits your app's needs – push notifications for remote notifications, and local notifications for in-app reminders and events.
+
+// 11. At this stage, all that's left to do is send a notification
+// Firebase Console > Project Overview > Project Settings > Cloud Messaging
+// We're doing this so Firebase has a way to communicate with Apple
+// Apple Dev > Certificates, Identifiers, and Profiles > Keys > Key name: app name, check push notifications > Continue > Download and keep it somewhere safe
+// This will be the key Firebase uses to send notifications to Apple
+// Back to Firebase, upload the key, type in the Key ID and Team ID
+
+//12. Back to Xcode, build. Then navigate to Firebase Cloud Messaging > Start your first campaign 
+// In additional settings, make sure to enable sound and Apple badge, and make the count 1. 
+
+
