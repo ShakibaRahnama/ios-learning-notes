@@ -1,1 +1,10 @@
-//ALWYAYS REMEMBER TO ACTIVATE VENV WHEN DEPLOYING CLOUD FUNCTION!!! Otherwise you'll get a bunch of ImportError
+Error: 
+raise ImportError(
+ImportError: The requests library is not installed from please install the requests package to use the requests transport.
+
+What I tried:
+- ALWYAYS REMEMBER TO ACTIVATE VENV WHEN DEPLOYING CLOUD FUNCTION!!! Otherwise you'll get a bunch of ImportError
+- python -m pip install requests ---- didnt work even with venv activated 
+- Alternatively, tried uninstalling the package and reinstalling it with sudo -H pip3 install requests, got the same error
+
+------
