@@ -1,0 +1,24 @@
+How does the function function
+
+1. Gets triggered when post parameters change, aka document update, aka event.
+
+2. Creates an instance of Firebase client
+
+3. If event parameters available: 
+  3.1. Stores them (them being commenter username and op email) 
+  3.2. Queries client for op email in order to access: 
+    3.2.1. op notification tokens 
+    3.2.2. op unread notifications
+3* Raises error "change params not found"
+
+4. Double check whether comment is still available (not applicable rn, because no delete option)
+4* if it's been removed, return
+
+5. Check whether op's notification tokens have been logged properly 
+5* if nothing's been stored, return
+
+6. Create messaging.Notification object with desired title and body 
+
+7. Create message.Messaging object with retrieved token and notification created in 6
+
+8. messaging.send(msg), where msg is the object we created in 7
