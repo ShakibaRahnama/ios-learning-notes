@@ -1,0 +1,9 @@
+1. Loading pinwheel on calendar view 
+2. The cloud function for sending notifications is buggy (raises KeyError for event paramteres, so I 
+think what's wrong is that I haven't double checked variable names -- I already have the function flow
+down)
+3. The logic for my discover view in SwiftUI is also buggy (I assumed if I load op information and store
+it in a different list it will work the same, but what I'm seeing now is that they're not necessarily 
+compatible, so try a different logic)
+4. SwiftUI view for the sign up is buggy (I got it off ChatGPT but I added a textfield so it doesn't look 
+good when it's scrolled)
