@@ -22,3 +22,8 @@ How does the function function
 7. Create message.Messaging object with retrieved token and notification created in 6
 
 8. messaging.send(msg), where msg is the object we created in 7
+
+--- 
+Possible issues:
+- Not all tokens have the notification sent to (currently it's only set to the first element in the list)
+- Optional binding equivalent in Python???
