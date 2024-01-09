@@ -9,6 +9,8 @@ How does the function function
   3.2. Queries client for op email in order to access: 
     3.2.1. op notification tokens 
     3.2.2. op unread notifications
+    (3.2.2* if the field for unread notification exists, add one. If it doesn't, create and set to 1.)
+
 3* Raises error "change params not found"
 
 4. Double check whether comment is still available (not applicable rn, because no delete option)
