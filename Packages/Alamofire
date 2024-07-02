@@ -1,0 +1,5 @@
+// doing this purely with SPM 
+https://github.com/Alamofire/Alamofire.git
+
+// important, because otherwise it won't let you run the app on a physical device 
+// Package must be installed using "Exact Version", choose 5.8.1.
