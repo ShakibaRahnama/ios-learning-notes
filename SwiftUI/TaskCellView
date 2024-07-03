@@ -1,0 +1,40 @@
+import SwiftUI
+
+struct TaskCell: View {
+    let title: String
+    let subtitle: String
+    let iconName: String
+    let iconColor: Color
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(Color("BrandInk"))
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            Image(systemName: iconName)
+                .foregroundColor(Color(iconColor))
+                .imageScale(.large)
+        }
+        .padding()
+        .background(Color("BrandYellow"))
+        .clipShape(Capsule())
+        .cornerRadius(3)
+    }
+}
+
+#Preview {
+        List {
+            TaskCell(title: "Complete Project", subtitle: "Due: Tomorrow", iconName: "checkmark.circle", iconColor: .green)
+            TaskCell(title: "Team Meeting", subtitle: "3:00 PM", iconName: "person.3", iconColor: .blue)
+            TaskCell(title: "Buy Groceries", subtitle: "5 items", iconName: "cart", iconColor: .black)
+        }
+        .listStyle(PlainListStyle())
+}
