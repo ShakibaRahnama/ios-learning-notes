@@ -1,0 +1,55 @@
+SwiftUI App Life Cycle
+In a SwiftUI-based app, the life cycle is managed by the @main attribute and conforms to the App protocol. Here are the key components:
+
+Application Launch:
+
+@main and App Protocol: The entry point of the app is defined using the @main attribute on a struct that conforms to the App protocol. This struct defines the main scene of the app.
+Scene Management:
+
+Scene: The main scene is defined using a WindowGroup, which provides the initial view hierarchy.
+State Management:
+
+State management is more declarative and integrated with the SwiftUI view hierarchy using properties like @State, @Binding, @ObservedObject, @StateObject, and @EnvironmentObject.
+Application Life Cycle Modifiers:
+
+You can handle life cycle events using scene phase modifiers such as onChange(of:).
+
+UIKit App Life Cycle
+In a UIKit-based app, the app life cycle is managed by the UIApplicationDelegate protocol. Here are the key methods and their roles:
+
+Application Launch:
+
+application(_:didFinishLaunchingWithOptions:): Called when the app has finished launching and is ready to run. This is where you typically set up your initial view controller and other necessary configurations.
+State Transitions:
+
+applicationDidBecomeActive(_:): Called when the app becomes active (foreground).
+applicationWillResignActive(_:): Called when the app is about to become inactive (e.g., incoming phone call).
+applicationDidEnterBackground(_:): Called when the app enters the background.
+applicationWillEnterForeground(_:): Called when the app is about to enter the foreground from the background.
+applicationWillTerminate(_:): Called when the app is about to terminate. This is the place to save data if needed.
+Handling Background Tasks:
+
+application(_:performFetchWithCompletionHandler:): Used for background fetch.
+application(_:handleEventsForBackgroundURLSession:completionHandler:): Used for handling background URL session events.
+Handling Notifications:
+
+application(_:didReceiveRemoteNotification:fetchCompletionHandler:): Called when a remote notification is received.
+application(_:didRegisterForRemoteNotificationsWithDeviceToken:): Called when the app successfully registers for remote notifications.
+
+Key Differences
+Entry Point:
+
+UIKit: Uses @UIApplicationMain or manually sets up UIApplicationDelegate.
+SwiftUI: Uses @main attribute on a struct conforming to App.
+Life Cycle Management:
+
+UIKit: Life cycle methods are handled in UIApplicationDelegate.
+SwiftUI: Life cycle events are managed using scene phases and environment values.
+View Hierarchy:
+
+UIKit: Views are managed with view controllers.
+SwiftUI: Views are declaratively defined using structs.
+State Management:
+
+UIKit: State is managed through various means, including properties and notification centers.
+SwiftUI: State is managed declaratively using property wrappers like @State and @ObservedObject.
