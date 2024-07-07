@@ -1,0 +1,18 @@
+1. Add the Custom Font to Your Project:
+
+Drag and drop your custom font file (e.g., CustomFont.ttf) into your Xcode project.
+Make sure the font file is included in the "Copy Bundle Resources" build phase.
+Update Info.plist:
+
+2. Open Info.plist.
+Add a new entry with the key Fonts provided by application.
+Set the value to the filename of your font (e.g., CustomFont.ttf).
+
+3. Use the Custom Font in SwiftUI:
+                Text("MyApp")
+                    .font(.custom("CustomFontName", size: 34))
+                    .fontWeight(.bold)
+                    .padding(.bottom, 40)
+
+
+Info.plist might initially not show up in the project directory. Something you can do is tweak something in the Target > Info and then it'll show up.
