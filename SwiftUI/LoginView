@@ -1,0 +1,57 @@
+// so far
+import SwiftUI
+
+struct LoginView: View {
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @ObservedObject var viewModel: SignInViewModel
+
+    var body: some View {
+        ZStack {
+            Color("brand yellow")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 20) {
+                Image("AppLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+                    .padding(.bottom, -40)
+                    .padding(.top, 50)
+                
+                Text("scintilla")
+                    .font(.custom(Constants.brandSansSerif, size: 23))
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("brand blue"))
+                    .padding(.bottom, 40)
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal, 40)
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal, 40)
+                
+                Button(action: {
+                    viewModel.signIn()
+                }) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                .padding(.top, 20)
+                
+                Spacer()
+            }
+        }
+    }
+}
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView(viewModel: SignInViewModel())
+    }
+}
